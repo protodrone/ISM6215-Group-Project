@@ -1,5 +1,4 @@
 import configparser, random, requests
-from platform import node
 import mysql.connector
 from mysql.connector import errorcode
 
