@@ -1,5 +1,4 @@
 import configparser, random, requests
-from turtle import position
 import mysql.connector
 from mysql.connector import errorcode
 
