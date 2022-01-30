@@ -22,10 +22,10 @@ to config.ini then update it with your database credentials.
 
 Functions include:
 * getPersonIdMax()
- * Returns the highest PersonId for use in random person selection.
+    * Returns the highest PersonId for use in random person selection.
 * getCompanyIdMax()
- * Returns the highest CompanyId for use in random company selection.
+    * Returns the highest CompanyId for use in random company selection.
 * randomizeParentCompanies(numParents)
 * generateReviews(numReviews)
 * getRandomComment()
- * Will be used in generateCommentAnswer(numAnsers). Need the questions first, so waiting on those for now.
+    * Will be used in generateCommentAnswer(numAnsers). Need the questions first, so waiting on those for now.
