@@ -6,7 +6,7 @@ ISM6215 Spring 2022 Group Project
 
 Python utility I wrote to generate and load ramdom sample data for the project.
 JobNames.csv was sourced from https://www.onetcenter.org/database.html#individual-files.
-Cities.txt was sources from https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068. RandomNames.csv was sourced from
+Cities.txt was sourced from https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068. RandomNames.csv was sourced from
 http://random-name-generator.info.
 
 # Setup Quickstart
