@@ -38,3 +38,5 @@ Functions include:
 * generateReviews(numReviews)
 * getRandomComment()
     * Will be used in generateCommentAnswer(numAnsers). Need the questions first, so waiting on those for now.
+* printCompanyTree()
+    * Recursively print the Company tree
