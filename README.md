@@ -15,12 +15,12 @@ Best to use the app in a Python Virtual Environment (Python best practice). If y
 familiar with VENV, the docs are at https://docs.python.org/3/library/venv.html. 
 
 TL;DR
-git clone https://github.com/protodrone/ISM6215-Group-Project.git
-cd ISM6215-Group-Project
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+* git clone https://github.com/protodrone/ISM6215-Group-Project.git
+* cd ISM6215-Group-Project
+* python3 -m venv .venv
+* source .venv/bin/activate
+* pip install --upgrade pip
+* pip install -r requirements.txt
 
 The app uses the Python ConfigParser and looks for config.ini. Copy example_config.ini
 to config.ini then update it with your database credentials.
