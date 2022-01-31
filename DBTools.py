@@ -124,6 +124,27 @@ def printCompanyTree():
     cnx.close()
     return
 
+def getReviewIds():
+    """returns a list of current Review Ids"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "SELECT Id FROM Review"
+    cursor.execute(query)
+    reviewIds = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    return reviewIds
+
+def generateCommentAnswers():
+    """generates a random comment answer for each question for each review"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    for id in getReviewIds():
+        query = "INSERT INTO "
+    cursor.close()
+    cnx.close()
+    return
+
 print('Person Max = ', getPersonIdMax())
 print('Company = ', getCompanyIdMax())
 
