@@ -124,6 +124,104 @@ def printCompanyTree():
     cnx.close()
     return
 
+def generateQuestionTypes():
+    """insert default question types of star and comment"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "INSERT INTO QuestionType (Type) VALUES ('Star'),('Comment')"
+    cursor.execute(query)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    return
+
+def generateQuestionTypes():
+    """insert default question types of star and comment"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "INSERT INTO QuestionType (Type) VALUES ('Star'),('Comment')"
+    cursor.execute(query)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    return
+
+def generateQuestions():
+    """insert default sample questions"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "INSERT INTO ReviewQuestions (QTypeId, QuestionText) VALUES"
+    query += " (1, 'Star Question 1'),"
+    query += " (1, 'Star Question 2'),"
+    query += " (1, 'Star Question 3'),"
+    query += " (1, 'Star Question 4'),"
+    query += " (1, 'Star Question 5'),"
+    query += " (2, 'Comment Question 1'),"
+    query += " (2, 'Comment Question 2'),"
+    query += " (2, 'Comment Question 3'),"
+    query += " (2, 'Comment Question 4'),"
+    query += " (2, 'Comment Question 5')"
+    cursor.execute(query)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    return
+
+def getReviewIds():
+    """returns a list of current Review Ids"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "SELECT Id FROM Review"
+    cursor.execute(query)
+    reviewIds = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    return reviewIds
+
+def getQuestionIds():
+    """returns a list of current Question Ids"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "SELECT Id FROM ReviewQuestions"
+    cursor.execute(query)
+    ReviewQuestionIds = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    return ReviewQuestionIds
+
+def insertAnswer(QId, ReviewId):
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "INSERT INTO Answers (QId, ReviewId) VALUES (%s, %s)"
+    cursor.execute(query, (QId, ReviewId))
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    return
+
+def insertManyAnswers(answers):
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "INSERT INTO Answers (QId, ReviewId) VALUES (%s, %s)"
+    cursor.executemany(query, answers)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    return
+    return
+
+def generateAnswers():
+    """generates an answer for each question for each review"""
+    questionIds = getQuestionIds()
+    answers = []
+    for id in getReviewIds():
+        for qid in questionIds:
+            answers.append((qid[0],id[0]))
+    insertManyAnswers(answers)
+    return
+
+
+
 print('Person Max = ', getPersonIdMax())
 print('Company = ', getCompanyIdMax())
 
@@ -136,9 +234,11 @@ print('Company = ', getCompanyIdMax())
 # Uncomment to print random comments.
 # for i in range(20):
 #    print(getRandomComment())
-
 # Uncomment to print the Company Tree
 # printCompanyTree()
+# generateQuestionTypes()
+# generateQuestions()
+# generateAnswers()
 
 
 

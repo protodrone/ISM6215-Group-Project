@@ -26,13 +26,12 @@ CREATE TABLE `Answers` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `QId` int DEFAULT NULL,
   `ReviewId` int DEFAULT NULL,
-  `AnswerType` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `FK_QId_idx` (`QId`),
   KEY `FK_ReviewId_idx` (`ReviewId`),
   CONSTRAINT `FK_QId` FOREIGN KEY (`QId`) REFERENCES `ReviewQuestions` (`Id`),
   CONSTRAINT `FK_ReviewId` FOREIGN KEY (`ReviewId`) REFERENCES `Review` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=371535 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +119,7 @@ CREATE TABLE `QuestionType` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Type` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +142,7 @@ CREATE TABLE `Review` (
   KEY `FK_CompanyId_idx` (`CompanyId`),
   CONSTRAINT `FK_CompanyId` FOREIGN KEY (`CompanyId`) REFERENCES `Company` (`Id`),
   CONSTRAINT `FK_PersonId` FOREIGN KEY (`PersonId`) REFERENCES `Person` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16003 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40003 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +159,7 @@ CREATE TABLE `ReviewQuestions` (
   PRIMARY KEY (`Id`),
   KEY `FK_QTypeId_idx` (`QTypeId`),
   CONSTRAINT `FK_QTypeId` FOREIGN KEY (`QTypeId`) REFERENCES `QuestionType` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,4 +204,4 @@ CREATE TABLE `Suffix` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-29 21:55:42
+-- Dump completed on 2022-01-31 21:36:32
