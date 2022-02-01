@@ -38,5 +38,11 @@ Functions include:
 * generateReviews(numReviews)
 * getRandomComment()
     * Will be used in generateCommentAnswer(numAnsers). Need the questions first, so waiting on those for now.
+* generateQuestionTypes()
+    * generates default question types of Star and Comment
+* generateQuestions()
+    * Generates default Star and Comment Questions 1-5
+* generateAnswers()
+    * Generates an answer record for each question for each review
 * printCompanyTree()
     * Recursively print the Company tree
