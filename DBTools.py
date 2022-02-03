@@ -15,6 +15,7 @@ cnxdict = {
 
 def getPersonIdMax():
     """returns the highest/last PersonId"""
+    print("Getting Person Ids.")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "SELECT MAX(Id) FROM Person"
@@ -27,6 +28,7 @@ def getPersonIdMax():
 
 def getCompanyIdMax():
     """returns the highest/last CompanyId"""
+    print("Getting Company Id Max")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "SELECT MAX(Id) FROM Company"
@@ -43,6 +45,7 @@ def randomizeParentCompanies(numParents):
     parentId may be randomly repeatedly. This problem is exagerated in smaller
     data sets.
     """
+    print("Randomizing Parent Companies")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     cursor.execute("UPDATE Company SET ParentCompany = NULL")
@@ -57,6 +60,7 @@ def randomizeParentCompanies(numParents):
 
 def generateReviews(numReviews):
     """generate numReviews number of random reviews"""
+    print("Generating Reviews")
     companyMax = getCompanyIdMax()
     personMax = getPersonIdMax()
     with open('Cities.txt') as f:
@@ -126,17 +130,7 @@ def printCompanyTree():
 
 def generateQuestionTypes():
     """insert default question types of star and comment"""
-    cnx = mysql.connector.connect(**cnxdict)
-    cursor = cnx.cursor()
-    query = "INSERT INTO QuestionType (Type) VALUES ('Star'),('Comment')"
-    cursor.execute(query)
-    cnx.commit()
-    cursor.close()
-    cnx.close()
-    return
-
-def generateQuestionTypes():
-    """insert default question types of star and comment"""
+    print("Generating default question types of Star and Comment.")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "INSERT INTO QuestionType (Type) VALUES ('Star'),('Comment')"
@@ -148,6 +142,7 @@ def generateQuestionTypes():
 
 def generateQuestions():
     """insert default sample questions"""
+    print("Generate default sample Star and Comment questions 1-5.")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "INSERT INTO ReviewQuestions (QTypeId, QuestionText) VALUES"
@@ -169,6 +164,7 @@ def generateQuestions():
 
 def getReviewIds():
     """returns a list of current Review Ids"""
+    print("Getting Review Ids")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "SELECT Id FROM Review"
@@ -180,6 +176,7 @@ def getReviewIds():
 
 def getQuestionIds():
     """returns a list of current Question Ids"""
+    print("Getting Question Ids")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "SELECT Id FROM ReviewQuestions"
@@ -190,6 +187,8 @@ def getQuestionIds():
     return ReviewQuestionIds
 
 def insertAnswer(QId, ReviewId):
+    """Inserts a single answer."""
+    print("Inserting Answer")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "INSERT INTO Answers (QId, ReviewId) VALUES (%s, %s)"
@@ -200,6 +199,7 @@ def insertAnswer(QId, ReviewId):
     return
 
 def insertManyAnswers(answers):
+    """Inserts a list of answers."""
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
     query = "INSERT INTO Answers (QId, ReviewId) VALUES (%s, %s)"
@@ -220,6 +220,50 @@ def generateAnswers():
     insertManyAnswers(answers)
     return
 
+def getAnswerIds():
+    """returns a list of current Answers Ids"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "SELECT Id FROM Answers"
+    cursor.execute(query)
+    AnswerIds = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    return AnswerIds
+
+def insertManyCommentAnswers(commentAnswers):
+    """Inserting Comment Answer List"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "INSERT INTO Answers (AnswerId, Comment) VALUES (%s, %s)"
+    cursor.executemany(query, commentAnswers)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    return
+
+def getCommentAnswerIds():
+    """returns a list of current Comment Answers Ids"""
+    print("Getting Comment Answer Ids.")
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "select a.Id from Answers a inner join ReviewQuestions q on a.QId = q.Id"
+    query += " inner join QuestionType qt on q.QTypeId = qt.Id where qt.Type = 'Comment'"
+    cursor.execute(query)
+    CommentAnswerIds = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    return CommentAnswerIds
+
+def generateCommentAnswers():
+    """Generating Comment Answers."""
+    print("Generating Comment Answers.")
+    commentAnswers = []
+    for a in getCommentAnswerIds():
+        commentAnswers.append((a[0],getRandomComment()))
+    insertManyCommentAnswers(commentAnswers)
+    return
+   
 
 
 print('Person Max = ', getPersonIdMax())
@@ -239,6 +283,7 @@ print('Company = ', getCompanyIdMax())
 # generateQuestionTypes()
 # generateQuestions()
 # generateAnswers()
+# generateCommentAnswers()
 
 
 

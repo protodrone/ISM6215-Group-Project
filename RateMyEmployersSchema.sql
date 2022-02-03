@@ -163,6 +163,20 @@ CREATE TABLE `ReviewQuestions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `sentences`
+--
+
+DROP TABLE IF EXISTS `sentences`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sentences` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sentence` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=160629 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `StarAnswers`
 --
 
@@ -204,4 +218,4 @@ CREATE TABLE `Suffix` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-31 21:36:32
+-- Dump completed on 2022-02-02 21:09:28
