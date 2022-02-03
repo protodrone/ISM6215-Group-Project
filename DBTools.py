@@ -39,6 +39,19 @@ def getCompanyIdMax():
     cnx.close()
     return max
 
+def getSentenceIdMax():
+    """returns the highest/last sentences Id"""
+    print("Getting sentences Id Max")
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "SELECT MAX(Id) FROM sentences"
+    cursor.execute(query)
+    row = cursor.fetchone()
+    max = row[0]
+    cursor.close()
+    cnx.close()
+    return max
+
 def randomizeParentCompanies(numParents):
     """generates numParents random parent company associations.
     The total number of children may not match numParents because the same
@@ -235,7 +248,7 @@ def insertManyCommentAnswers(commentAnswers):
     """Inserting Comment Answer List"""
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
-    query = "INSERT INTO Answers (AnswerId, Comment) VALUES (%s, %s)"
+    query = "INSERT INTO CommentAnswers (AnswerId, Comment) VALUES (%s, %s)"
     cursor.executemany(query, commentAnswers)
     cnx.commit()
     cursor.close()
@@ -255,12 +268,41 @@ def getCommentAnswerIds():
     cnx.close()
     return CommentAnswerIds
 
+def getSentence(Id):
+    """returns a specific sentence"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "SELECT sentence FROM sentences WHERE id = %s"
+    cursor.execute(query,(Id,))
+    row = cursor.fetchone()
+    max = row[0]
+    cursor.close()
+    cnx.close()
+    return max
+
+def getAllSentences():
+    """returns the list of sentences"""
+    print("Getting sentences")
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "SELECT sentence FROM sentences"
+    cursor.execute(query)
+    sentences = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    return sentences
+
 def generateCommentAnswers():
     """Generating Comment Answers."""
     print("Generating Comment Answers.")
+    max = getSentenceIdMax()
     commentAnswers = []
-    for a in getCommentAnswerIds():
-        commentAnswers.append((a[0],getRandomComment()))
+    commentAnswerIds = getCommentAnswerIds()
+    sentences = getAllSentences()
+    print("Found {} Comment Answer Ids".format(len(commentAnswerIds)))
+    for a in commentAnswerIds:
+        commentAnswers.append((a[0],sentences[random.randrange(0,max)][0]))
+    #print(commentAnswers[0:4])
     insertManyCommentAnswers(commentAnswers)
     return
    
