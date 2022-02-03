@@ -305,7 +305,38 @@ def generateCommentAnswers():
     #print(commentAnswers[0:4])
     insertManyCommentAnswers(commentAnswers)
     return
-   
+
+def getStarAnswerIds():
+    """returns a list of current Star Answers Ids"""
+    print("Getting Star Answer Ids.")
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "select a.Id from Answers a inner join ReviewQuestions q on a.QId = q.Id"
+    query += " inner join QuestionType qt on q.QTypeId = qt.Id where qt.Type = 'Star'"
+    cursor.execute(query)
+    StarAnswerIds = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    return StarAnswerIds
+
+def insertManyStarAnswers(starAnswers):
+    """Inserting Comment Answer List"""
+    cnx = mysql.connector.connect(**cnxdict)
+    cursor = cnx.cursor()
+    query = "INSERT INTO StarAnswers (AnswerId, Answer) VALUES (%s, %s)"
+    cursor.executemany(query, starAnswers)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    return
+
+def generateStarAnswers():
+    """Generates and inserts a random star answer for each star question for each Review"""
+    starAnswers = []
+    for id in getStarAnswerIds():
+        starAnswers.append((id[0],random.randrange(0,6)))
+    insertManyStarAnswers(starAnswers)
+    return
 
 
 print('Person Max = ', getPersonIdMax())
@@ -326,7 +357,4 @@ print('Company = ', getCompanyIdMax())
 # generateQuestions()
 # generateAnswers()
 # generateCommentAnswers()
-
-
-
-
+# generateStarAnswers()
