@@ -27,7 +27,12 @@ to config.ini then update it with your database credentials.
 
 # App Usage
 
+Option 1) 
 Edit DBTools.py to call the desired function(s). Examples included inline.
+
+Option 2)
+Use the functions interactively in a Python shell. Import DBTools.py and call the functions
+à la carte as needed. 
 
 Functions include:
 * getPersonIdMax()
