@@ -37,9 +37,9 @@ Use the functions interactively in a Python shell. Import DBTools.py and call th
 
 Functions include:
 * getPersonIdMax()
-    * Returns the highest PersonId for use in random person selection.
+    * Returns the highest PersonId for use in random person selection with the presumption of a starting record Id of 1 and contiguous Ids to the max. This works so long as the Person table has only been truncated, which resets the AUTO_INCREMENT of the PK, and not deleted. Not a great concern, as this function is generally used in the intial population of an empty schema.
 * getCompanyIdMax()
-    * Returns the highest CompanyId for use in random company selection.
+    * Returns the highest CompanyId for use in random company selection. Same caveat as getPersonIdMax().
 * randomizeParentCompanies(numParents)
 * generateReviews(numReviews)
 * getRandomComment()
