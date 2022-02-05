@@ -64,3 +64,31 @@ ORDER BY
 	CompaniesReviewed DESC
 LIMIT 10
 ;
+
+/*
+ Companies with a Parent Company
+*/
+SELECT
+	c.Name AS CompanyName,
+    (SELECT Name from Company where Id = c.ParentCompany) AS ParentCompany
+FROM
+	Company c
+WHERE 
+	c.ParentCompany IS NOT NULL
+;
+
+/*
+	Top 10 Companies by direct subsidiary quantity, depth of 1
+    It is important to note that this query only caluculates the Company Tree to a depth of 1,
+    as SQL is limited to fixed iteration and lacks dynamic recursion. This is an artifact of being
+    a query languge and not a turing complete programming language. 
+*/
+SELECT
+	c.Name AS CompanyName,
+    (SELECT COUNT(Id) FROM COMPANY WHERE ParentCompany = c.Id) AS Subsidiaries
+FROM 
+	Company c
+ORDER BY
+	Subsidiaries DESC
+LIMIT 10
+;
