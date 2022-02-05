@@ -7,7 +7,8 @@ ISM6215 Spring 2022 Group Project
 Python utility I wrote to generate and load ramdom sample data for the project.
 JobNames.csv was sourced from https://www.onetcenter.org/database.html#individual-files.
 Cities.txt was sourced from https://www.britannica.com/topic/list-of-cities-and-towns-in-the-United-States-2023068. RandomNames.csv was sourced from
-http://random-name-generator.info. Company names were sourced from https://fauxid.com/tools/fake-company-generator.
+http://random-name-generator.info. Company names were sourced from https://fauxid.com/tools/fake-company-generator. Randmon comments were sourced from https://hipsum.co api, which remains
+my favorite Lorem Ipsum generator.
 
 # Setup Quickstart
 
