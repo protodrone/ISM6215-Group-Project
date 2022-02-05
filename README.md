@@ -44,5 +44,9 @@ Functions include:
     * Generates default Star and Comment Questions 1-5
 * generateAnswers()
     * Generates an answer record for each question for each review
+* generateCommentAnswers()
+    * Generates a comment answer for each answer for question of type comment
+* generateStarAnswers()
+    * Generates a star answer for each answer for question of type star
 * printCompanyTree()
     * Recursively print the Company tree
