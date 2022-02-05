@@ -18,3 +18,49 @@ GROUP BY
 ORDER BY
 	c.Name ASC, q.QuestionText ASC, sa.Answer DESC
 ;
+
+/*
+  Cities with Company Branches with > 1 Review
+*/
+SELECT 
+	r.BranchLocation,
+    c.Name,
+    COUNT(r.Id) AS TotalReviews
+FROM 
+	Review r
+    INNER JOIN Company c on r.CompanyId = c.Id
+GROUP BY
+	r.BranchLocation, c.Name
+HAVING
+	TotalReviews > 1
+ORDER BY
+	TotalReviews DESC, r.BranchLocation ASC, c.Name ASC
+    ;
+
+/*
+ Sample data summary.
+*/
+SELECT
+	(SELECT COUNT(Id) FROM Person) AS People,
+    (SELECT COUNT(Id) FROM Company) AS Companies,
+    (SELECT COUNT(Id) FROM ReviewQuestions) AS Questions,
+    (SELECT COUNT(Id) FROM Review) AS Reviews,
+    (SELECT COUNT(Id) FROM Answers) AS Answers,
+    (SELECT COUNT(Id) FROM StarAnswers) AS StarAnswers,
+    (SELECT COUNT(Id) FROM CommentAnswers) AS CommentAnswers
+;
+
+/*
+ Top 10 Reviewers by Review Quantity
+*/
+SELECT DISTINCT
+	CONCAT(p.Lname, ', ', p.FirstName) AS Person,
+    (SELECT COUNT(DISTINCT CompanyId) FROM Review WHERE PersonId = p.Id) AS CompaniesReviewed
+FROM 
+	Person p
+    INNER JOIN Review r on p.Id = r.PersonId
+    INNER JOIN Company c on r.CompanyId = c.Id
+ORDER BY
+	CompaniesReviewed DESC
+LIMIT 10
+;
