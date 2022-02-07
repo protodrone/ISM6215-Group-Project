@@ -31,7 +31,7 @@ CREATE TABLE `Answers` (
   KEY `FK_ReviewId_idx` (`ReviewId`),
   CONSTRAINT `FK_QId` FOREIGN KEY (`QId`) REFERENCES `ReviewQuestions` (`Id`),
   CONSTRAINT `FK_ReviewId` FOREIGN KEY (`ReviewId`) REFERENCES `Review` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=371535 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
