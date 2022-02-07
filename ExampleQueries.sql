@@ -70,11 +70,12 @@ LIMIT 10
 */
 SELECT
 	c.Name AS CompanyName,
-    (SELECT Name from Company where Id = c.ParentCompany) AS ParentCompany
+    pc.Name AS ParentCompany
 FROM
 	Company c
-WHERE 
-	c.ParentCompany IS NOT NULL
+    INNER JOIN Company pc on c.ParentCompany = pc.Id
+ORDER BY 
+	CompanyName
 ;
 
 /*
