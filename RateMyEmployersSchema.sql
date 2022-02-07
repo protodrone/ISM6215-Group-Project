@@ -66,7 +66,7 @@ CREATE TABLE `Company` (
   PRIMARY KEY (`Id`),
   KEY `FK_ParentCompany_idx` (`ParentCompany`),
   CONSTRAINT `FK_ParentCompany` FOREIGN KEY (`ParentCompany`) REFERENCES `Company` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `Person` (
   KEY `FK_Suffix_idx` (`SuffixId`),
   CONSTRAINT `FK_Prefix` FOREIGN KEY (`PrefixId`) REFERENCES `Prefix` (`Id`),
   CONSTRAINT `FK_Suffix` FOREIGN KEY (`SuffixId`) REFERENCES `Suffix` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=401 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `QuestionType` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Type` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ CREATE TABLE `Review` (
   KEY `FK_CompanyId_idx` (`CompanyId`),
   CONSTRAINT `FK_CompanyId` FOREIGN KEY (`CompanyId`) REFERENCES `Company` (`Id`),
   CONSTRAINT `FK_PersonId` FOREIGN KEY (`PersonId`) REFERENCES `Person` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40003 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `ReviewQuestions` (
   PRIMARY KEY (`Id`),
   KEY `FK_QTypeId_idx` (`QTypeId`),
   CONSTRAINT `FK_QTypeId` FOREIGN KEY (`QTypeId`) REFERENCES `QuestionType` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +173,7 @@ CREATE TABLE `sentences` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sentence` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=160629 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
