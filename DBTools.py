@@ -44,7 +44,7 @@ def getSentenceIdMax():
     print("Getting sentences Id Max")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
-    query = "SELECT MAX(Id) FROM sentences"
+    query = "SELECT MAX(Id) FROM RateMyEmployers.sentences"
     cursor.execute(query)
     row = cursor.fetchone()
     max = row[0]
@@ -272,7 +272,7 @@ def getSentence(Id):
     """returns a specific sentence"""
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
-    query = "SELECT sentence FROM sentences WHERE id = %s"
+    query = "SELECT sentence FROM RateMyEmployers.sentences WHERE id = %s"
     cursor.execute(query,(Id,))
     row = cursor.fetchone()
     max = row[0]
@@ -285,7 +285,7 @@ def getAllSentences():
     print("Getting sentences")
     cnx = mysql.connector.connect(**cnxdict)
     cursor = cnx.cursor()
-    query = "SELECT sentence FROM sentences"
+    query = "SELECT sentence FROM RateMyEmployers.sentences"
     cursor.execute(query)
     sentences = cursor.fetchall()
     cursor.close()
